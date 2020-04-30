@@ -10,7 +10,8 @@
         </Console>
 
         <!-- append is false for test purposes so the logfiles are automatically overwritten. Don't use this on production. -->
-        <RollingFile name="rollingFile" append="false" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}.%i.log">
+        <RollingFile name="rollingFile" append="false" fileName="logs/error.log"
+                     filePattern="logs/error-%d{yyyy-MM-dd}.%i.log">
             <PatternLayout pattern="${logpattern}"/>
             <Policies>
                 <!-- Rolling once a day -->

@@ -1,48 +1,35 @@
 package Marktplaats;
 
-import Marktplaats.dao.GebruikerDao;
-import Marktplaats.dao.VerkoperDao;
-import Marktplaats.domain.Artikel;
-import Marktplaats.domain.Gebruiker;
-import Marktplaats.domain.Verkoper;
+import Marktplaats.service.GebruikerService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import java.math.BigDecimal;
+import javax.swing.*;
 
 public class App {
     public static void main(String[] args) {
         new App().start();
+
+        //new GebruikerService().start();
     }
 
-    private void start() {
+    private static void start() {
         EntityManager em = Persistence.createEntityManagerFactory("MySQL").createEntityManager();
+        new GebruikerService().start();
 
-        GebruikerDao gebruikerDao = new GebruikerDao(em);
-        VerkoperDao verkoperDao = new VerkoperDao(em);
+        String keuze = JOptionPane.showInputDialog("Om gebruik te kunnen maken moet je ingelogd zijn.\n " +
+                "| 1. Registreren | 2. Inloggen |");
 
-        verkoperDao.addGebruiker(new Verkoper(
-                "simon@marktplaats.nl",
-                "wachtwoord",
-                "Het kasteel 115, Apeldoorn"
-        ));
-
-        gebruikerDao.addGebruiker(new Gebruiker("bram@marktplaats.nl", "wachtwoord"));
-
-        Verkoper simon = (Verkoper) verkoperDao.getGebruiker(1);
-        Gebruiker bram = gebruikerDao.getGebruiker(2);
-
-        simon.addArtikel(new Artikel(
-                "Schoenen",
-                "Adidas Ultraboost",
-                "Heren sportschoen",
-                new BigDecimal("119.90")
-        ));
-
-        verkoperDao.update(simon);
-        gebruikerDao.update(bram);
-//
-
-        em.close();
+        switch (keuze) {
+            case "1":
+                System.out.println("keuze was Registreren");
+                break;
+            case "2":
+                new GebruikerService().logIn(em);
+                break;
+            default:
+                App.start();
+                break;
+        }
     }
 }

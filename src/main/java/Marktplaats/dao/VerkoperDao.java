@@ -7,6 +7,4 @@ public class VerkoperDao extends GebruikerDao {
     public VerkoperDao(EntityManager em) {
         super(em);
     }
-
-
 }

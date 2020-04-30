@@ -1,18 +1,18 @@
 package Marktplaats.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "typeGebruiker")
 public class Gebruiker extends AbstractEntity {
 
     @Column(unique = true)
     @Email
-    private String email;
+    protected String email;
 
     private String wachtwoord;
-    private boolean gebruikerIsVerkoper;
 
     public Gebruiker() {
     }
@@ -20,12 +20,14 @@ public class Gebruiker extends AbstractEntity {
     public Gebruiker(String email, String wachtwoord) {
         this.email = email;
         this.wachtwoord = wachtwoord;
-        this.gebruikerIsVerkoper = false;
     }
 
-    protected Gebruiker(String email, String wachtwoord, boolean gebruikerIsVerkoper) {
-        this.email = email;
-        this.wachtwoord = wachtwoord;
-        this.gebruikerIsVerkoper = gebruikerIsVerkoper;
+    @Override
+    public String toString() {
+        return "Gebruiker{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", wachtwoord='" + wachtwoord + '\'' +
+                '}';
     }
 }
