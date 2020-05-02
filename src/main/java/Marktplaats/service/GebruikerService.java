@@ -1,108 +1,112 @@
 package Marktplaats.service;
 
+import Marktplaats.dao.GebruikerDao;
 import Marktplaats.domain.Gebruiker;
+import Marktplaats.domain.Product;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.*;
+import java.math.BigDecimal;
+
 
 public class GebruikerService {
 
+    @Inject
+    private EntityManager em;
+    @Inject
+    GebruikerDao gebruikerDao;
+
     private Gebruiker user;
 
-    public void start() {
-        EntityManager em = Persistence.createEntityManagerFactory("MySQL").createEntityManager();
+    public GebruikerService() {
 
-/*        //TODO if type gebruiker is gebruiker
-        GebruikerDao gebruikerDao = new GebruikerDao(em);
-        //TODO if type gebruiker is verkoper
-        VerkoperDao verkoperDao = new VerkoperDao(em);*/
-
-/*        verkoperDao.addGebruiker(new Verkoper(
-                "simon",
-                "ww",
-                "Het kasteel 115, Apeldoorn",
-                true, true, true, true
-        ));
-
-        verkoperDao.addGebruiker(new Verkoper(
-                "bram@marktplaats.nl",
-                "zijnWachtwoord",
-                "Ergens 1, Leusden",
-                false, true, false, false
-        ));
-
-        gebruikerDao.addGebruiker(new Gebruiker("chantal@marktplaats.nl", "haarWachtwoord"));
-
-        Verkoper simon = (Verkoper) verkoperDao.getGebruiker(1);
-        Verkoper bram = (Verkoper) verkoperDao.getGebruiker(2);
-        Gebruiker chantal = gebruikerDao.getGebruiker(3);
-
-        simon.addArtikel(new Product("Schoenen", "Adidas Ultraboost", "Heren sportschoen", new BigDecimal("119.90")));
-        simon.addArtikel(new Product("Schoenen", "Nike Flyknit", "Heren sportschoen", new BigDecimal("98.97")));
-        simon.addArtikel(new Product("Jassen", "Hugo Boss Jas", "Heren jas", new BigDecimal("279.30")));
-        verkoperDao.update(simon);
-
-        bram.addArtikel(new Product("Consoles", "PS4", "Gloednieuwe PS4", new BigDecimal("289.00")));
-        bram.addArtikel(new Product("TV", "Samsung TV", "Zwarte LED TV - 60 inch", new BigDecimal("477")));
-        bram.addArtikel(new Product("Kast", "Billy", "Zwarte Billy kast", new BigDecimal("39.95")));
-        verkoperDao.update(bram);
-
-        gebruikerDao.update(chantal);
-
-        System.out.println(simon);
-        System.out.println(bram);
-        System.out.println(chantal);*/
-
-        //Sluit verbinding
-        em.close();
     }
 
-    public void logIn(EntityManager em) {
+    public void start() {
+        String keuze = JOptionPane.showInputDialog("Om gebruik te kunnen maken moet je ingelogd zijn.\n " +
+                "| 1. Registreren | 2. Inloggen |");
+
+        switch (keuze) {
+            case "1":
+                System.out.println("keuze was Registreren");
+                break;
+            case "2":
+                logIn();
+                break;
+            case "3":
+                maakDatabase();
+            default:
+                start();
+                break;
+        }
+    }
+
+    private void maakDatabase() {
+        gebruikerDao.gebruikerToevoegen(new Gebruiker("simon", "ww", "Het kasteel 115, Apeldoorn",
+                true, true, true, true));
+        gebruikerDao.gebruikerToevoegen(new Gebruiker("bram@marktplaats.nl", "zijnWachtwoord", "Ergens 1, Leusden",
+                false, true, false, false));
+        gebruikerDao.gebruikerToevoegen(new Gebruiker("chantal@marktplaats.nl", "haarWachtwoord"));
+
+        Gebruiker simon = gebruikerDao.getGebruikerById(1);
+        Gebruiker bram = gebruikerDao.getGebruikerById(2);
+        Gebruiker chantal = gebruikerDao.getGebruikerById(3);
+
+
+        simon.artikelToevoegen(new Product("Schoenen", "Adidas Ultraboost", "Heren sportschoen", new BigDecimal("119.90")));
+        simon.artikelToevoegen(new Product("Schoenen", "Nike Flyknit", "Heren sportschoen", new BigDecimal("98.97")));
+        simon.artikelToevoegen(new Product("Jassen", "Hugo Boss Jas", "Heren jas", new BigDecimal("279.30")));
+        gebruikerDao.update(simon);
+
+        bram.artikelToevoegen(new Product("Consoles", "PS4", "Gloednieuwe PS4", new BigDecimal("289.00")));
+        bram.artikelToevoegen(new Product("TV", "Samsung TV", "Zwarte LED TV - 60 inch", new BigDecimal("477")));
+        bram.artikelToevoegen(new Product("Kast", "Billy", "Zwarte Billy kast", new BigDecimal("39.95")));
+        gebruikerDao.update(bram);
+
+        start();
+    }
+
+    public void logIn() {
         String email = JOptionPane.showInputDialog("Voer je e-mailadres in.");
         String wachtwoord = JOptionPane.showInputDialog("Voer je wachtwoord in.");
-        String keuze = "";
+//        String email = "simon";
+//        String wachtwoord = "ww";
         System.out.println("Controleren of de invoer matcht met de database");
-        if (vindAccount(em, email, wachtwoord)) {
-            keuze = JOptionPane.showInputDialog("Inloggen succesvol.\n" +
-                    "| 1. Contactpagina | 2. Artikel zoeken | 3. Artikel aanbieden | 4. Artikel terugtrekken |");
 
+        TypedQuery<Gebruiker> query = em.createQuery("SELECT g FROM Gebruiker g WHERE g.email = :email AND g.wachtwoord = :wachtwoord", Gebruiker.class);
+        query.setParameter("email", email);
+        query.setParameter("wachtwoord", wachtwoord);
+        if (query.getResultList().size() >= 1) {
+            this.user = query.getSingleResult();
+            homepage();
         } else {
-            System.out.println("Inloggen mislukt. Probeer het opnieuw");
-            logIn(em);
+            String antwoord = JOptionPane.showInputDialog("Inloggen mislukt. Opnieuw proberen?\n" +
+                    "| 1. Ja | 2. Nee |");
+            if (antwoord.equals("1")) {
+                logIn();
+            } else {
+                start();
+            }
         }
+    }
+
+    private void homepage() {
+        String keuze = JOptionPane.showInputDialog("Homepage\n" +
+                "| 1. Contactpagina | 2. Artikel zoeken | 3. Artikel aanbieden | 4. Artikel terugtrekken |");
+
         switch (keuze) {
             case "1":
                 break;
             case "2":
                 break;
             case "3":
-                artikelAanbieden();
+//                user.artikelToevoegen(new Artikel());
+
                 break;
             case "4":
                 break;
         }
-    }
-
-    private boolean vindAccount(EntityManager em, String email, String wachtwoord) {
-        TypedQuery<Gebruiker> query = em.createQuery("SELECT g FROM Gebruiker g WHERE g.email = :email AND g.wachtwoord = :wachtwoord", Gebruiker.class);
-        query.setParameter("email", email);
-        query.setParameter("wachtwoord", wachtwoord);
-        System.out.println(query.getResultList().size());
-        if (query.getResultList().size() >= 1) {
-            this.user = query.getSingleResult();
-            System.out.println(user);
-            return true;
-        } else {
-            System.out.println("Inloggen Mislukt. Probeer opnieuw.");
-            logIn(em);
-        }
-        return false;
-    }
-
-    private void artikelAanbieden() {
-//        user.addArtikel(new Product("Schoenen", "Adidas Ultraboost", "Heren sportschoen", new BigDecimal("119.90")));
-
     }
 }
