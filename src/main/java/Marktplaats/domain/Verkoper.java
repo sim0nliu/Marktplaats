@@ -55,6 +55,8 @@ public class Verkoper extends Gebruiker {
         artikel.setVerkoper(this);
     }
 
+
+
     @Override
     public String toString() {
         return "Verkoper{" +

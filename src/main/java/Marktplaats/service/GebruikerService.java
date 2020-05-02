@@ -1,27 +1,23 @@
 package Marktplaats.service;
 
-import Marktplaats.dao.GebruikerDao;
-import Marktplaats.dao.VerkoperDao;
 import Marktplaats.domain.Gebruiker;
-import Marktplaats.domain.Product;
-import Marktplaats.domain.Verkoper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.*;
-import java.math.BigDecimal;
-import java.util.Scanner;
 
 public class GebruikerService {
-    private String email;
-    private String wachtwoord;
+
+    private Gebruiker user;
 
     public void start() {
         EntityManager em = Persistence.createEntityManagerFactory("MySQL").createEntityManager();
 
+/*        //TODO if type gebruiker is gebruiker
         GebruikerDao gebruikerDao = new GebruikerDao(em);
-        VerkoperDao verkoperDao = new VerkoperDao(em);
+        //TODO if type gebruiker is verkoper
+        VerkoperDao verkoperDao = new VerkoperDao(em);*/
 
 /*        verkoperDao.addGebruiker(new Verkoper(
                 "simon",
@@ -64,8 +60,8 @@ public class GebruikerService {
     }
 
     public void logIn(EntityManager em) {
-        email = JOptionPane.showInputDialog("Voer je e-mailadres in.");
-        wachtwoord = JOptionPane.showInputDialog("Voer je wachtwoord in.");
+        String email = JOptionPane.showInputDialog("Voer je e-mailadres in.");
+        String wachtwoord = JOptionPane.showInputDialog("Voer je wachtwoord in.");
         String keuze = "";
         System.out.println("Controleren of de invoer matcht met de database");
         if (vindAccount(em, email, wachtwoord)) {
@@ -95,6 +91,8 @@ public class GebruikerService {
         query.setParameter("wachtwoord", wachtwoord);
         System.out.println(query.getResultList().size());
         if (query.getResultList().size() >= 1) {
+            this.user = query.getSingleResult();
+            System.out.println(user);
             return true;
         } else {
             System.out.println("Inloggen Mislukt. Probeer opnieuw.");

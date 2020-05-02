@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13d402da-c504-4cb0-a2cb-590695676845" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Bezorgwijzen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Dienst.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/service/GebruikerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/dao/VerkoperDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/dao/VerkoperDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Artikel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Artikel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Gebruiker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Gebruiker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/dao/GebruikerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/dao/GebruikerDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Verkoper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Verkoper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/service/GebruikerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/service/GebruikerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +138,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588232275758</updated>
-      <workItem from="1588232278439" duration="33290000" />
+      <workItem from="1588232278439" duration="34533000" />
     </task>
     <task id="LOCAL-00001" summary="Gebruikers en Verkopers toegevoegd&#10;Artikel toegevoegd">
       <created>1588243457430</created>
@@ -155,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588243457430</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Navigatie toegevoegd&#10;Database opgebouwd">
+      <created>1588273143176</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1588273143176</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +162,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Gebruikers en Verkopers toegevoegd&#10;Artikel toegevoegd" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gebruikers en Verkopers toegevoegd&#10;Artikel toegevoegd" />
+    <MESSAGE value="Navigatie toegevoegd&#10;Database opgebouwd" />
+    <option name="LAST_COMMIT_MESSAGE" value="Navigatie toegevoegd&#10;Database opgebouwd" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Inspections" timestamp="1588241321946">
@@ -174,34 +174,34 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588258753481" />
-    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1588259788630">
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1588357575697">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1588259788630" />
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1588357575697" />
     <state x="898" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588256828270">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="898" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588256828270" />
-    <state x="585" y="113" key="CommitChangelistDialog2" timestamp="1588273115739">
+    <state x="585" y="113" key="CommitChangelistDialog2" timestamp="1588273141447">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1588273115739" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1588273115762">
+    <state x="585" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1588273141447" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1588410783803">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588273115762" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1588273115762">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588410783803" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1588410783803">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588273115762" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1588273115762">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588410783803" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1588410783803">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588273115762" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1588273115762">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588410783803" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1588410783803">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588273115762" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588410783803" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1588258306119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -222,10 +222,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="490" y="175" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588272511255" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1588243468537">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1588273149389">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588243468537" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588273149389" />
     <state x="797" y="354" width="326" height="237" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1588259623539">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

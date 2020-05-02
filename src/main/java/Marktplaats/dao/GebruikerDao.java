@@ -11,15 +11,15 @@ public class GebruikerDao {
         this.em = em;
     }
 
-    public Gebruiker getGebruiker(int id) {
-        return em.find(Gebruiker.class, id);
-    }
-
     public void addGebruiker(Gebruiker g) {
         em.getTransaction().begin();
         em.persist(g);
         em.getTransaction().commit();
         em.detach(g);
+    }
+
+    public Gebruiker getGebruiker(int id) {
+        return em.find(Gebruiker.class, id);
     }
 
     public Gebruiker update(Gebruiker p) {
