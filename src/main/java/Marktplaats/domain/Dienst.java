@@ -1,18 +1,19 @@
 package Marktplaats.domain;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
 public class Dienst extends Artikel {
-    @NotNull
-    private String categorie;
-    @NotNull
-    private String artikelNaam;
-    @NotNull
-    private BigDecimal prijs;
 
-    private String omschrijving;
-    //private ??? bijlagen;
+    public Dienst() {
+
+    }
+
+    public Dienst(String categorie, String artikelNaam, String omschrijving, BigDecimal prijs) {
+        setCategorie(categorie);
+        setArtikelNaam(artikelNaam);
+        setOmschrijving(omschrijving);
+        setPrijs(prijs);
+    }
 }

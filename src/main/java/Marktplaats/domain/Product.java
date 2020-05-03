@@ -1,42 +1,48 @@
 package Marktplaats.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Product extends Artikel {
 
-    @NotNull
-    private String categorie;
-    @NotNull
-    private String artikelNaam;
-    @NotNull
-    private BigDecimal prijs;
+    private boolean afhalenThuis = false;
+    private boolean afhalenMagazijn = false;
+    private boolean versturen = false;
+    private boolean versturenOnderRembours = false;
 
-    private String omschrijving;
+    //BLOB
+    //protected byte bijlagen[];
 
-    //private ??? bijlagen;
     public Product() {
     }
 
-    public Product(String categorie, String artikelNaam, String omschrijving, BigDecimal prijs, Bezorgwijze... bezorgwijzenVoorProduct) {
-        this.categorie = categorie;
-        this.artikelNaam = artikelNaam;
-        this.omschrijving = omschrijving;
-        this.prijs = prijs;
-
+    public Product(String categorie, String artikelNaam, String omschrijving, BigDecimal prijs,
+                   boolean afhalenThuis, boolean afhalenMagazijn, boolean versturen, boolean versturenOnderRembours) {
+        setCategorie(categorie);
+        setArtikelNaam(artikelNaam);
+        setOmschrijving(omschrijving);
+        setPrijs(prijs);
+        setAfhalenThuis(afhalenThuis);
+        setAfhalenMagazijn(afhalenMagazijn);
+        setVersturen(versturen);
+        setVersturenOnderRembours(versturenOnderRembours);
     }
 
-    @Override
-    public String toString() {
-        return "\n" + "Product{" +
-                "categorie='" + categorie + '\'' +
-                ", artikelNaam='" + artikelNaam + '\'' +
-                ", prijs=" + prijs +
-                ", omschrijving='" + omschrijving + '\'' +
-                '}';
+    public void setAfhalenThuis(boolean afhalenThuis) {
+        this.afhalenThuis = afhalenThuis;
     }
+
+    public void setAfhalenMagazijn(boolean afhalenMagazijn) {
+        this.afhalenMagazijn = afhalenMagazijn;
+    }
+
+    public void setVersturen(boolean versturen) {
+        this.versturen = versturen;
+    }
+
+    public void setVersturenOnderRembours(boolean versturenOnderRembours) {
+        this.versturenOnderRembours = versturenOnderRembours;
+    }
+
 }
