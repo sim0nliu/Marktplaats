@@ -1,6 +1,9 @@
 package Marktplaats.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 
 @Entity
 //@Inheritance(strategy = InheritanceType.JOINED)
@@ -8,7 +11,7 @@ import javax.persistence.*;
 public class Artikel extends AbstractEntity {
 
     @ManyToOne
-    private Gebruiker gebruiker;
+    protected Gebruiker gebruiker;
 
     public void setGebruiker(Gebruiker gebruiker) {
         this.gebruiker = gebruiker;

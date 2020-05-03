@@ -9,4 +9,6 @@ public abstract class AbstractEntity {
     @Id
     @GeneratedValue
     protected int id;
+
+
 }
