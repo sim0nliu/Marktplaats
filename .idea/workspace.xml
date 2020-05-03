@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13d402da-c504-4cb0-a2cb-590695676845" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Verkoper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/dao/ArtikelDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/dao/ArtikelDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/dao/GebruikerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/dao/GebruikerDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Artikel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Artikel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Bezorgwijze.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Dienst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Dienst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Gebruiker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Gebruiker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/domain/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Marktplaats/service/GebruikerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Marktplaats/service/GebruikerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +139,7 @@
       <updated>1588232275758</updated>
       <workItem from="1588232278439" duration="35965000" />
       <workItem from="1588413070131" duration="33586000" />
-      <workItem from="1588507052821" duration="14780000" />
+      <workItem from="1588507052821" duration="17685000" />
     </task>
     <task id="LOCAL-00001" summary="Gebruikers en Verkopers toegevoegd&#10;Artikel toegevoegd">
       <created>1588243457430</created>
@@ -177,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588420301871</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Gebruiker Verkoper&#10;Artikel Product/Dienst">
+      <created>1588524379840</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1588524379840</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,7 +187,8 @@
     <MESSAGE value="Navigatie toegevoegd&#10;Database opgebouwd" />
     <MESSAGE value="Ingelogde user globaal gemaakt" />
     <MESSAGE value="CDI toegevoegd,&#10;Backend navigatie aangepast" />
-    <option name="LAST_COMMIT_MESSAGE" value="CDI toegevoegd,&#10;Backend navigatie aangepast" />
+    <MESSAGE value="Gebruiker Verkoper&#10;Artikel Product/Dienst" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gebruiker Verkoper&#10;Artikel Product/Dienst" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Assign_Data_Sources" timestamp="1588425638753">
@@ -219,50 +219,50 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588516948126" />
-    <state x="585" y="113" key="CommitChangelistDialog2" timestamp="1588420299829">
+    <state x="585" y="113" key="CommitChangelistDialog2" timestamp="1588524377963">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1588420299829" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1588524060201">
+    <state x="585" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1588524377963" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1588527102298">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588524060201" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1588524060200">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588527102298" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1588527102298">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588524060200" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1588524060200">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588527102298" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1588527102297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588524060200" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1588524060201">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588527102297" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1588527102298">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588524060201" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1588523183680">
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588527102298" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1588526952468">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588523183680" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1588523183679">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588526952468" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1588526952467">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588523183679" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1588523183679">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588526952467" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1588526952467">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588523183679" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1588523183679">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588526952467" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1588526952467">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588523183679" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588526952467" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1588272511255">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="490" y="175" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588272511255" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1588420342367">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1588524382040">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588420342367" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588524382040" />
     <state x="797" y="354" width="326" height="237" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1588523199746">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -303,13 +303,15 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Marktplaats/service/GebruikerService.java</url>
-          <line>31</line>
-          <properties class="Marktplaats.service.GebruikerService" method="start">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="10" />
+          <line>169</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Marktplaats/service/GebruikerService.java</url>
+          <line>165</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -36,7 +36,7 @@ public class GebruikerDao {
     }
 
     public Verkoper getVerkoperEmailEnWachtwoord(String email, String wachtwoord) {
-        TypedQuery<Verkoper> query = em.createQuery("SELECT g FROM Verkoper g WHERE  g.email = :email AND g.wachtwoord = :wachtwoord", Verkoper.class);
+        TypedQuery<Verkoper> query = em.createQuery("SELECT v FROM Verkoper v WHERE  v.email = :email AND v.wachtwoord = :wachtwoord AND TYPE(v) = Verkoper", Verkoper.class);
         query.setParameter("email", email);
         query.setParameter("wachtwoord", wachtwoord);
         return query.getSingleResult();

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.swing.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,12 +25,18 @@ public class GebruikerService {
     ArtikelDao artikelDao;
 
     private Gebruiker gebruiker;
+    private Verkoper verkoper;
 
     public GebruikerService() {
 
     }
 
     public void start() {
+        //TODO: remove after debug
+        maakDatabase();
+        logIn();
+        /////
+
         String keuze = JOptionPane.showInputDialog("Om gebruik te kunnen maken moet je ingelogd zijn.\n " +
                 "| 1. Registreren | 2. Inloggen |");
         switch (keuze) {
@@ -48,6 +55,7 @@ public class GebruikerService {
     }
 
     private void maakDatabase() {
+        System.out.println("Database aan het maken");
         gebruikerDao.verkoperToevoegen(new Verkoper("s", "ww", "Het kasteel 115, Apeldoorn",
                 true, true, true, true));
         gebruikerDao.verkoperToevoegen(new Verkoper("b", "ww", "Ergens 1, Leusden",
@@ -77,6 +85,7 @@ public class GebruikerService {
     }
 
     public void logIn() {
+        System.out.println("Logging in");
         //TODO: reset to normal
         String email = "s";
         String wachtwoord = "ww";
@@ -85,9 +94,13 @@ public class GebruikerService {
 
         System.out.println("Controleren of de invoer matcht met de database");
         if (gebruikerDao.getVerkoperEmailEnWachtwoord(email, wachtwoord) != null) {
-            this.gebruiker = gebruikerDao.getVerkoperEmailEnWachtwoord(email, wachtwoord);
+            this.verkoper = gebruikerDao.getVerkoperEmailEnWachtwoord(email, wachtwoord);
+
             //TODO: reset to normal
-            homepage();
+            productAanbieden();
+            //////////
+
+            //homepage();
         } else if (gebruikerDao.getGebruikerEmailEnWachtwoord(email, wachtwoord) != null) {
             this.gebruiker = gebruikerDao.getGebruikerEmailEnWachtwoord(email, wachtwoord);
 
@@ -127,6 +140,7 @@ public class GebruikerService {
 
     //TODO productAanbieden afmaken
     private void productAanbieden() {
+        System.out.println("Product aanbieden. Wachten op invoer.");
         //TODO: baseer categorie op mogelijheden van systeem
         String categorie = "testcat";
 
@@ -148,32 +162,37 @@ public class GebruikerService {
                 "Bijlagen:");*/
 
         //TODO: baseer bezorgwijze op mogelijkheden van accountinvoer
-        List<String> mogelijkeBezorgwijzen = null;
+        List<String> mogelijkeBezorgwijzen = new ArrayList<>();
         setMogelijkeBezorgwijzen(mogelijkeBezorgwijzen);
 
-        String antwoord1 = null, antwoord2 = null, antwoord3 = null, antwoord4 = null;
+        String antwoord1 = "", antwoord2 = "", antwoord3 = "", antwoord4 = "";
 
-        for (int i = 1; i <= mogelijkeBezorgwijzen.size(); i++) {
-            switch (i) {
-                case 1:
-                    antwoord1 = JOptionPane.showInputDialog("Wil je gebruik maken van " + mogelijkeBezorgwijzen.get(i + 1) + "?\n"
-                            + "| 1. Ja | 2. Nee |"
-                    );
-                    break;
-                case 2:
-                    antwoord2 = JOptionPane.showInputDialog("Wil je gebruik maken van " + mogelijkeBezorgwijzen.get(i + 1) + "?\n"
+        for (int i = 0; i < mogelijkeBezorgwijzen.size(); i++) {
+            String bezorgwijze = mogelijkeBezorgwijzen.get(i);
+            switch (bezorgwijze) {
+                case "afhalenThuis":
+                    antwoord1 = "1";
+                    antwoord1 = JOptionPane.showInputDialog("Wil je gebruik maken van " + mogelijkeBezorgwijzen.get(i) + "?\n"
                             + "| 1. Ja | 2. Nee |");
                     break;
-                case 3:
-                    antwoord3 = JOptionPane.showInputDialog("Wil je gebruik maken van " + mogelijkeBezorgwijzen.get(i + 1) + "?\n"
+                case "afhalenMagazijn":
+                    antwoord2 = "1";
+                    antwoord2 = JOptionPane.showInputDialog("Wil je gebruik maken van " + mogelijkeBezorgwijzen.get(i) + "?\n"
                             + "| 1. Ja | 2. Nee |");
                     break;
-                case 4:
-                    antwoord4 = JOptionPane.showInputDialog("Wil je gebruik maken van " + mogelijkeBezorgwijzen.get(i + 1) + "?\n"
+                case "versturen":
+                    antwoord3 = "1";
+                    antwoord3 = JOptionPane.showInputDialog("Wil je gebruik maken van " + mogelijkeBezorgwijzen.get(i) + "?\n"
+                            + "| 1. Ja | 2. Nee |");
+                    break;
+                case "versturenOnderRembours":
+                    antwoord4 = "1";
+                    antwoord4 = JOptionPane.showInputDialog("Wil je gebruik maken van " + mogelijkeBezorgwijzen.get(i) + "?\n"
                             + "| 1. Ja | 2. Nee |");
                     break;
             }
         }
+
         boolean thuisAfhalen = false;
         boolean afhalenMagazijn = false;
         boolean verzenden = false;
@@ -192,17 +211,23 @@ public class GebruikerService {
             verzendenOnderRembours = true;
         }
 
-        gebruiker.verkoopArtikel(new Product(categorie, artikelNaam, omschrijving, new BigDecimal(String.valueOf(prijs)),
+        verkoper.verkoopArtikel(new Product(categorie, artikelNaam, omschrijving, new BigDecimal(String.valueOf(prijs)),
                 thuisAfhalen, afhalenMagazijn, verzenden, verzendenOnderRembours));
-        gebruikerDao.updateGebruiker(gebruiker);
+        gebruikerDao.updateVerkoper(verkoper);
     }
 
     private void setMogelijkeBezorgwijzen(List<String> mogelijkeBezorgwijzen) {
-        if (gebruiker.getAfhalenThuis()) {
+        if (verkoper.getAfhalenThuis()) {
             mogelijkeBezorgwijzen.add("afhalenThuis");
         }
-        if (gebruiker.getAfhalenMagazijn()) {
+        if (verkoper.getAfhalenMagazijn()) {
             mogelijkeBezorgwijzen.add("afhalenMagazijn");
+        }
+        if (verkoper.getVersturen()) {
+            mogelijkeBezorgwijzen.add("versturen");
+        }
+        if (verkoper.getVersturenOnderRemours()) {
+            mogelijkeBezorgwijzen.add("versturenOnderRembours");
         }
     }
 
