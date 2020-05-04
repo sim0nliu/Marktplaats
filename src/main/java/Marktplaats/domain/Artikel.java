@@ -3,6 +3,7 @@ package Marktplaats.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,6 +19,10 @@ public abstract class Artikel extends AbstractEntity {
     protected BigDecimal prijs;
 
     protected String omschrijving;
+
+    @NotNull
+    @OneToOne
+    protected Categorie categorieCLASS;
 
     @ManyToOne(cascade = CascadeType.ALL)
     Gebruiker verkoper;

@@ -1,0 +1,41 @@
+package Marktplaats.dao;
+
+import Marktplaats.domain.Categorie;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
+
+public class CategorieDao {
+    @Inject
+    EntityManager em;
+
+    public void categorieToevoegen(Categorie categorie) {
+        em.getTransaction().begin();
+        em.persist(categorie);
+        em.getTransaction().commit();
+        em.detach(categorie);
+    }
+
+    public void categorieVerwijderenMetNaam(String naamCategorie) {
+        List<Categorie> select = categorieVindenMetNaam(naamCategorie);
+        if (select.get(0).getCategorieNaam().equals(naamCategorie)) {
+            em.getTransaction().begin();
+            em.remove(select.get(0));
+            em.getTransaction().commit();
+        }
+    }
+
+    private List<Categorie> categorieVindenMetNaam(String naamCategorie) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Categorie> query = cb.createQuery(Categorie.class);
+
+        Root<Categorie> categorie = query.from(Categorie.class);
+        query.select(categorie).distinct(true).where(cb.equal(categorie.get("categorieNaam"), naamCategorie));
+
+        return em.createQuery(query).getResultList();
+    }
+}

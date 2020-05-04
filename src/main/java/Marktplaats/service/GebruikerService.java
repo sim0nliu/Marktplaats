@@ -1,11 +1,9 @@
 package Marktplaats.service;
 
 import Marktplaats.dao.ArtikelDao;
+import Marktplaats.dao.CategorieDao;
 import Marktplaats.dao.GebruikerDao;
-import Marktplaats.domain.Dienst;
-import Marktplaats.domain.Gebruiker;
-import Marktplaats.domain.Product;
-import Marktplaats.domain.Verkoper;
+import Marktplaats.domain.*;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -23,6 +21,8 @@ public class GebruikerService {
     GebruikerDao gebruikerDao;
     @Inject
     ArtikelDao artikelDao;
+    @Inject
+    CategorieDao categorieDao;
 
     private Gebruiker gebruiker;
     private Verkoper verkoper;
@@ -56,6 +56,10 @@ public class GebruikerService {
 
     private void maakDatabase() {
         System.out.println("Database aan het maken");
+        categorieDao.categorieToevoegen(new Categorie("Kleding"));
+        categorieDao.categorieToevoegen(new Categorie("Apparatuur"));
+        categorieDao.categorieVerwijderenMetNaam("Kleding");
+
         gebruikerDao.verkoperToevoegen(new Verkoper("s", "ww", "Het kasteel 115, Apeldoorn",
                 true, true, true, true));
         gebruikerDao.verkoperToevoegen(new Verkoper("b", "ww", "Ergens 1, Leusden",
@@ -166,6 +170,7 @@ public class GebruikerService {
         setMogelijkeBezorgwijzen(mogelijkeBezorgwijzen);
 
         String antwoord1 = "", antwoord2 = "", antwoord3 = "", antwoord4 = "";
+        boolean thuisAfhalen = false, afhalenMagazijn = false, verzenden = false, verzendenOnderRembours = false;
 
         for (int i = 0; i < mogelijkeBezorgwijzen.size(); i++) {
             String bezorgwijze = mogelijkeBezorgwijzen.get(i);
@@ -192,11 +197,6 @@ public class GebruikerService {
                     break;
             }
         }
-
-        boolean thuisAfhalen = false;
-        boolean afhalenMagazijn = false;
-        boolean verzenden = false;
-        boolean verzendenOnderRembours = false;
 
         if (antwoord1.equals("1")) {
             thuisAfhalen = true;
