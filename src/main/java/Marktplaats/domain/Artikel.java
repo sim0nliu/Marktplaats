@@ -1,18 +1,18 @@
 package Marktplaats.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public abstract class Artikel extends AbstractEntity {
-    //TODO: Hangt af van de bestaande categorieën.
     @NotNull
-    protected String categorie;
+    @OneToMany(cascade = CascadeType.ALL)
+    protected List<Categorie> categorie = new ArrayList<>();
+
     @NotNull
     protected String artikelNaam;
     @NotNull
@@ -20,12 +20,9 @@ public abstract class Artikel extends AbstractEntity {
 
     protected String omschrijving;
 
-    @NotNull
-    @OneToOne
-    protected Categorie categorieCLASS;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    Gebruiker verkoper;
+    protected Gebruiker verkoper;
 
     protected boolean bod = false;
 
@@ -33,10 +30,6 @@ public abstract class Artikel extends AbstractEntity {
 
     public LocalDate getTijdVanPlaatsen() {
         return tijdVanPlaatsen;
-    }
-
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
     }
 
     public void setArtikelNaam(String artikelNaam) {
@@ -57,5 +50,11 @@ public abstract class Artikel extends AbstractEntity {
 
     public void setBod(boolean bod) {
         this.bod = bod;
+    }
+
+    public void setCategorie(String categorie) {
+        Categorie nieuweCategorie = new Categorie(categorie);
+        this.categorie.add(nieuweCategorie);
+        nieuweCategorie.setArtikel(this);
     }
 }

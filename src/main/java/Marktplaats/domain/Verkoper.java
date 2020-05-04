@@ -1,66 +1,42 @@
 package Marktplaats.domain;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.ArrayList;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
 @Table
 public class Verkoper extends Gebruiker {
+    @NotNull
     private String adres;
 
-    private boolean afhalenThuis = false;
-    private boolean afhalenMagazijn = false;
-    private boolean versturen = false;
-    private boolean versturenOnderRemours = false;
+
+
+    @NotNull
+    @ElementCollection//(fetch = FetchType.EAGER)
+    @CollectionTable(name = "bezorgwijzeVerkoper")//, joinColumns = @JoinColumn(name = "id"))
+    @Enumerated(EnumType.STRING)
+    protected List<Bezorgwijze> bezorgwijzen;
 
     public Verkoper(){}
 
-    public Verkoper(String email, String wachtwoord, String adres,
-                     boolean afhalenThuis, boolean afhalenMagazijn, boolean versturen, boolean versturenOnderRembours) {
+    public Verkoper(String email, String wachtwoord, String adres, Bezorgwijze... bezorgwijzen) {
         this.email = email;
         this.wachtwoord = wachtwoord;
         this.adres = adres;
-        this.afhalenThuis = afhalenThuis;
-        this.afhalenMagazijn = afhalenMagazijn;
-        this.versturen = versturen;
-        this.versturenOnderRemours = versturenOnderRembours;
-
+        setBezorgwijzen(bezorgwijzen);
     }
 
-    public boolean getAfhalenThuis() {
-        return afhalenThuis;
-    }
-
-    public boolean getAfhalenMagazijn() {
-        return afhalenMagazijn;
-    }
-
-    public boolean getVersturen() {
-        return versturen;
-    }
-
-    public boolean getVersturenOnderRemours() {
-        return versturenOnderRemours;
+    public void setBezorgwijzen(Bezorgwijze... bezorgwijzen) {
+        this.bezorgwijzen = Arrays.asList(bezorgwijzen);
     }
 
     public void setAdres(String adres) {
         this.adres = adres;
     }
 
-    @Override
-    public String toString() {
-        return "Verkoper{" +
-                "adres='" + adres + '\'' +
-                ", afhalenThuis=" + afhalenThuis +
-                ", afhalenMagazijn=" + afhalenMagazijn +
-                ", versturen=" + versturen +
-                ", versturenOnderRemours=" + versturenOnderRemours +
-                ", email='" + email + '\'' +
-                ", wachtwoord='" + wachtwoord + '\'' +
-                ", lijstVanTeVerkopenArtikelen=" + lijstVanTeVerkopenArtikelen +
-                '}';
+    public List<Bezorgwijze> getMogelijkeBezorgwijzen() {
+        return bezorgwijzen;
     }
 }

@@ -1,48 +1,38 @@
 package Marktplaats.domain;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+
+
+
+
+
 
 @Entity
 public class Product extends Artikel {
-
-    private boolean afhalenThuis = false;
-    private boolean afhalenMagazijn = false;
-    private boolean versturen = false;
-    private boolean versturenOnderRembours = false;
-
     //BLOB
     //protected byte bijlagen[];
+    @NotNull
+    @ElementCollection//(fetch = FetchType.EAGER)
+    @CollectionTable(name = "bezorgwijzeProduct")//, joinColumns = @JoinColumn(name = "id"))
+    @Enumerated(EnumType.STRING)
+    protected List<Bezorgwijze> bezorgwijzen;
 
     public Product() {
     }
 
-    public Product(String categorie, String artikelNaam, String omschrijving, BigDecimal prijs,
-                   boolean afhalenThuis, boolean afhalenMagazijn, boolean versturen, boolean versturenOnderRembours) {
+    public Product(String categorie, String artikelNaam, String omschrijving, BigDecimal prijs, Bezorgwijze... bezorgwijzen) {
         setCategorie(categorie);
         setArtikelNaam(artikelNaam);
         setOmschrijving(omschrijving);
         setPrijs(prijs);
-        setAfhalenThuis(afhalenThuis);
-        setAfhalenMagazijn(afhalenMagazijn);
-        setVersturen(versturen);
-        setVersturenOnderRembours(versturenOnderRembours);
+        setBezorgwijzen(bezorgwijzen);
     }
 
-    public void setAfhalenThuis(boolean afhalenThuis) {
-        this.afhalenThuis = afhalenThuis;
+    public void setBezorgwijzen(Bezorgwijze... bezorgwijzen) {
+        this.bezorgwijzen = Arrays.asList(bezorgwijzen);
     }
-
-    public void setAfhalenMagazijn(boolean afhalenMagazijn) {
-        this.afhalenMagazijn = afhalenMagazijn;
-    }
-
-    public void setVersturen(boolean versturen) {
-        this.versturen = versturen;
-    }
-
-    public void setVersturenOnderRembours(boolean versturenOnderRembours) {
-        this.versturenOnderRembours = versturenOnderRembours;
-    }
-
 }
