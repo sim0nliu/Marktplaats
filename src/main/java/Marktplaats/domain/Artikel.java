@@ -52,9 +52,11 @@ public abstract class Artikel extends AbstractEntity {
         this.bod = bod;
     }
 
-    public void setCategorie(String categorie) {
-        Categorie nieuweCategorie = new Categorie(categorie);
-        this.categorie.add(nieuweCategorie);
-        nieuweCategorie.setArtikel(this);
+    public void setCategorie(List<String> categorie) {
+        for (String s: categorie) {
+            Categorie nieuweCategorie = new Categorie(s);
+            this.categorie.add(nieuweCategorie);
+            nieuweCategorie.setArtikel(this);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package Marktplaats.domain;
 
+import jdk.nashorn.internal.objects.annotations.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
@@ -11,11 +13,9 @@ public class Verkoper extends Gebruiker {
     @NotNull
     private String adres;
 
-
-
     @NotNull
-    @ElementCollection//(fetch = FetchType.EAGER)
-    @CollectionTable(name = "bezorgwijzeVerkoper")//, joinColumns = @JoinColumn(name = "id"))
+    @ElementCollection
+    @CollectionTable(name = "bezorgwijzeVerkoper")
     @Enumerated(EnumType.STRING)
     protected List<Bezorgwijze> bezorgwijzen;
 

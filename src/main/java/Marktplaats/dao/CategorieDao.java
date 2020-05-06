@@ -4,6 +4,8 @@ import Marktplaats.domain.Categorie;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -27,6 +29,13 @@ public class CategorieDao {
             em.remove(select.get(0));
             em.getTransaction().commit();
         }
+    }
+
+    public List<String> vindAlleDistinctCategorieen() {
+        Query query = em.createNativeQuery("SELECT DISTINCT categorieNaam FROM Categorie");
+        List<Object> categorieen = query.getResultList();
+
+        return query.getResultList();
     }
 
     private List<Categorie> categorieVindenMetNaam(String naamCategorie) {
