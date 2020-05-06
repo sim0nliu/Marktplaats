@@ -1,6 +1,9 @@
 package Marktplaats.domain;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -28,6 +31,10 @@ public abstract class Artikel extends AbstractEntity {
 
     LocalDate tijdVanPlaatsen = LocalDate.now();
 
+    public String getArtikelNaam() {
+        return artikelNaam;
+    }
+
     public LocalDate getTijdVanPlaatsen() {
         return tijdVanPlaatsen;
     }
@@ -53,7 +60,7 @@ public abstract class Artikel extends AbstractEntity {
     }
 
     public void setCategorie(List<String> categorie) {
-        for (String s: categorie) {
+        for (String s : categorie) {
             Categorie nieuweCategorie = new Categorie(s);
             this.categorie.add(nieuweCategorie);
             nieuweCategorie.setArtikel(this);

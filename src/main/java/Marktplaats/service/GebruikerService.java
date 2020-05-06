@@ -65,6 +65,8 @@ public class GebruikerService {
         System.out.println("Verkoop plaatsen");
         simon.verkoopArtikel(new Product(Arrays.asList("Kleding"), "Adidas Ultraboost", "Heren sportschoen", new BigDecimal("119.90"),
                 Arrays.asList(Bezorgwijze.AfhalenThuis, Bezorgwijze.AfhalenMagazijn, Bezorgwijze.Versturen, Bezorgwijze.VersturenOnderRembours)));
+        simon.verkoopArtikel(new Product(Arrays.asList("Kleding"), "Merk Sneakers", "Adidas sportschoen", new BigDecimal("119.90"),
+                Arrays.asList(Bezorgwijze.AfhalenThuis, Bezorgwijze.AfhalenMagazijn, Bezorgwijze.Versturen, Bezorgwijze.VersturenOnderRembours)));
         simon.verkoopArtikel(new Product(Arrays.asList("Kleding"), "Nike Flyknit", "Heren sportschoen", new BigDecimal("98.97"),
                 Arrays.asList(Bezorgwijze.AfhalenThuis, Bezorgwijze.AfhalenMagazijn)));
         simon.verkoopArtikel(new Dienst(Arrays.asList("Klussen"), "Tegels leggen", "Voortuin tegels leggen", new BigDecimal("500")));
@@ -193,7 +195,7 @@ public class GebruikerService {
     private List<String> getMogelijkeCategorieen() {
         List<String> mogelijkeCategorieen = categorieDao.vindAlleDistinctCategorieen();
         List<String> gekozenCategorieen = new ArrayList<>();
-        JOptionPane.showConfirmDialog(null,"Geef aan onder welke categorie het artikel past.", "ArtikelKeuze",JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showConfirmDialog(null, "Geef aan onder welke categorie het artikel past.", "ArtikelKeuze", JOptionPane.DEFAULT_OPTION);
         for (String mogelijkheid : mogelijkeCategorieen) {
             String antwoord = JOptionPane.showInputDialog("Wil je gebruik maken van " + mogelijkheid + "?\n"
                     + "| 1. Ja | 2. Nee |");
@@ -208,6 +210,24 @@ public class GebruikerService {
         return gekozenCategorieen;
     }
 
+    private void artikelZoeken() {
+        String manierVanZoeken = "";
+        while (!(manierVanZoeken.equals("1") || (manierVanZoeken.equals("2")))) {
+            manierVanZoeken = JOptionPane.showInputDialog("Wil je een uitgebreide zoekopdracht uitvoeren?\n"
+                    + "| 1. Ja | 2. Nee |");
+        }
+        if (manierVanZoeken.equals("1")) {
+//            artikelUitgebreidZoeken();
+        } else {
+            String zoekterm = JOptionPane.showInputDialog("Waar wil je naar zoeken?");
+            List<Artikel> gevondenArtikelen = artikelDao.zoekOpNaam(zoekterm);
+            for (Artikel gevondenArtikel : gevondenArtikelen) {
+                System.out.println(gevondenArtikel.getArtikelNaam());
+            }
+            homepage();
+        }
+    }
+
     private void homepage() {
         String keuze = JOptionPane.showInputDialog("Homepage\n" +
                 "| 1. Contactpagina | 2. Artikel zoeken | 3. Artikel aanbieden | 4. Artikel terugtrekken |");
@@ -216,6 +236,7 @@ public class GebruikerService {
             case "1":
                 break;
             case "2":
+                artikelZoeken();
                 break;
             case "3":
                 artikelAanbieden();
