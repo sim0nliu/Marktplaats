@@ -21,7 +21,8 @@ public class GebruikerService {
     @Inject
     protected GebruikerDao gebruikerDao;
     protected Gebruiker gebruiker;
-    protected Verkoper verkoper;
+
+    public static Verkoper verkoper;
 
     @Inject
     protected ArtikelDao artikelDao;
@@ -30,7 +31,7 @@ public class GebruikerService {
     protected CategorieDao categorieDao;
 
     public void start() {
-        maakDatabase();
+//        maakDatabase();
         registerOrLogin();
     }
 
@@ -65,6 +66,13 @@ public class GebruikerService {
         System.out.println("Verkoop plaatsen");
         simon.verkoopArtikel(new Product(Arrays.asList("Kleding"), "Adidas Ultraboost", "Heren sportschoen", new BigDecimal("119.90"),
                 Arrays.asList(Bezorgwijze.AfhalenThuis, Bezorgwijze.AfhalenMagazijn, Bezorgwijze.Versturen, Bezorgwijze.VersturenOnderRembours)));
+
+        simon.verkoopArtikel(new Product(Arrays.asList("Kleding"), "Adidas Uncaged", "Heren sneaker", new BigDecimal("379.90"),
+                Arrays.asList(Bezorgwijze.AfhalenThuis, Bezorgwijze.AfhalenMagazijn, Bezorgwijze.Versturen, Bezorgwijze.VersturenOnderRembours)));
+
+        simon.verkoopArtikel(new Product(Arrays.asList("Kleding"), "Smith Adidas", "Heren sportschoen", new BigDecimal("59.90"),
+                Arrays.asList(Bezorgwijze.AfhalenThuis, Bezorgwijze.AfhalenMagazijn, Bezorgwijze.Versturen, Bezorgwijze.VersturenOnderRembours)));
+
         simon.verkoopArtikel(new Product(Arrays.asList("Kleding"), "Merk Sneakers", "Adidas sportschoen", new BigDecimal("119.90"),
                 Arrays.asList(Bezorgwijze.AfhalenThuis, Bezorgwijze.AfhalenMagazijn, Bezorgwijze.Versturen, Bezorgwijze.VersturenOnderRembours)));
         simon.verkoopArtikel(new Product(Arrays.asList("Kleding"), "Nike Flyknit", "Heren sportschoen", new BigDecimal("98.97"),
@@ -152,6 +160,7 @@ public class GebruikerService {
 
         gebruikerDao.updateVerkoper(verkoper);
         System.out.println("Product toegevoegd");
+        homepage();
     }
 
     private String voerPrijsIn() {
@@ -217,15 +226,39 @@ public class GebruikerService {
                     + "| 1. Ja | 2. Nee |");
         }
         if (manierVanZoeken.equals("1")) {
-//            artikelUitgebreidZoeken();
+            //TODO uitgebreid zoeken afmaken
+            //TODO categorie uit systeem selecteren
+            String categorie = JOptionPane.showInputDialog("In welke categorie wil je zoeken?");
+            String naam = JOptionPane.showInputDialog("Wat is de naam van het product dat je zoekt?");
+            //TODO Alleen decimalen accepteren
+            String prijsMinimaal = JOptionPane.showInputDialog("Wat is de minimale prijs van het product dat je zoekt?");
+            BigDecimal prijsMiniaalBD = new BigDecimal(prijsMinimaal);
+            BigDecimal prijsMaximaalBD = new BigDecimal(0);
+            boolean eersteKeer = true;
+            while (!(prijsMiniaalBD.compareTo(prijsMaximaalBD) == -1)) {
+                if (eersteKeer) {
+                    prijsMaximaalBD = new BigDecimal(JOptionPane.showInputDialog("Wat is de maximale prijs van het product dat je zoekt?"));
+                    eersteKeer = false;
+                } else {
+                    prijsMaximaalBD = new BigDecimal(JOptionPane.showInputDialog("Opgegeven prijs was lager dan minimale prijs.\n" +
+                            "Probeer opnieuw:\n" +
+                            "Wat is de maximale prijs van het product dat je zoekt?"));
+                }
+            }
+
+            List<Artikel> gevondenArtikelen = artikelDao.zoekUitgebreid(categorie, naam, prijsMiniaalBD, prijsMaximaalBD);
+
+            for (Artikel gevondenArtikel : gevondenArtikelen) {
+                System.out.println(gevondenArtikel.getArtikelNaam());
+            }
         } else {
             String zoekterm = JOptionPane.showInputDialog("Waar wil je naar zoeken?");
             List<Artikel> gevondenArtikelen = artikelDao.zoekOpNaam(zoekterm);
             for (Artikel gevondenArtikel : gevondenArtikelen) {
                 System.out.println(gevondenArtikel.getArtikelNaam());
             }
-            homepage();
         }
+        homepage();
     }
 
     private void homepage() {

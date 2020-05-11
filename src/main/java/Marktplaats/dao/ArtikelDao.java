@@ -1,15 +1,11 @@
 package Marktplaats.dao;
 
 import Marktplaats.domain.Artikel;
-import Marktplaats.domain.Categorie;
-import Marktplaats.domain.Verkoper;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ArtikelDao {
@@ -33,8 +29,27 @@ public class ArtikelDao {
 
     public List<Artikel> zoekOpNaam(String zoekterm) {
         zoekterm = "%" + zoekterm + "%";
-        TypedQuery<Artikel> query = em.createQuery("SELECT a FROM Artikel a WHERE  a.artikelNaam LIKE :email", Artikel.class);
-        query.setParameter("email", zoekterm);
+        TypedQuery<Artikel> query = em.createQuery("SELECT a FROM Artikel a WHERE  a.artikelNaam LIKE :naam", Artikel.class);
+        query.setParameter("naam", zoekterm);
+        return query.getResultList();
+    }
+
+    public List<Artikel> zoekUitgebreid(String categorie, String naam, BigDecimal prijsMiniaal, BigDecimal prijsMaximaal) {
+        naam = "%" + naam + "%";
+
+        TypedQuery<Artikel> query = em.createQuery("SELECT a " +
+                "FROM Artikel a " +
+                "JOIN a.categorie cat " +
+                "WHERE cat.categorieNaam = :categorie " +
+                "AND a.artikelNaam LIKE :naam " +
+                "AND a.prijs >= :prijsMinimaal " +
+                "AND a.prijs <= :prijsMaximaal", Artikel.class);
+
+        query.setParameter("categorie", categorie);
+        query.setParameter("naam", naam);
+        query.setParameter("prijsMinimaal", prijsMiniaal);
+        query.setParameter("prijsMaximaal", prijsMaximaal);
+
         return query.getResultList();
     }
 }

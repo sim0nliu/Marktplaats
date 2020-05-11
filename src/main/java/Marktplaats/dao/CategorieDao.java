@@ -33,7 +33,6 @@ public class CategorieDao {
 
     public List<String> vindAlleDistinctCategorieen() {
         Query query = em.createNativeQuery("SELECT DISTINCT categorieNaam FROM Categorie");
-        List<Object> categorieen = query.getResultList();
 
         return query.getResultList();
     }
